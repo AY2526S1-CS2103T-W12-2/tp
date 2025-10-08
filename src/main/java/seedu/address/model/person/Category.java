@@ -29,7 +29,7 @@ public enum Category {
 
         String lowerCase = input.trim().toLowerCase();
         for (Category c: values()) {
-            if(c.displayName.toLowerCase().equals(lowerCase)) {
+            if (c.displayName.toLowerCase().equals(lowerCase)) {
                 return c;
             }
         }
