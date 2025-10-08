@@ -95,7 +95,7 @@ public class PersonBuilder {
     }
 
     /**
-     *Sets the Category of the Person that we are building.
+     * Sets the Category of the Person that we are building.
      */
     public PersonBuilder withCategory(String category) {
         this.category = Category.fromString(category);
