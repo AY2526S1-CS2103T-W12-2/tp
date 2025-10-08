@@ -5,14 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,7 +19,11 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
+    public static final String EMAIL_MESSAGE_CONSTRAINTS = "Emails should be of the form local@domain.tld";
+    /**
+     * checks email input for validity, must contain @ and domain with a dot.
+     */
+    private static final Pattern SIMPLE_EMAIL = Pattern.compile("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -120,5 +122,17 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a string category into a category enum
+     */
+    public static Category parseCategory(String input) throws ParseException {
+        requireNonNull(input);
+        try {
+            return Category.fromString(input);
+        } catch (IllegalArgumentException ex) {
+            throw new ParseException(Category.MESSAGE_CONSTRAINTS);
+        }
     }
 }
