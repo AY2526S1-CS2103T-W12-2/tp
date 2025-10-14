@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -97,8 +98,11 @@ class JsonAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddressCharacters(address)) {
+            throw new ParseException(Address.INVALID_CHARACTER_MESSAGE_CONSTRAINTS);
+        }
+        if (!Address.isValidAddressLength(address)) {
+            throw new ParseException(Address.INVALID_ADDRESS_LENGTH_MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
 

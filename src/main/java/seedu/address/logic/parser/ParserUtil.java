@@ -74,9 +74,14 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        if (!Address.isValidAddressCharacters(trimmedAddress)) {
+            throw new ParseException(Address.INVALID_CHARACTER_MESSAGE_CONSTRAINTS);
         }
+
+        if (!Address.isValidAddressLength(trimmedAddress)) {
+            throw new ParseException(Address.INVALID_ADDRESS_LENGTH_MESSAGE_CONSTRAINTS);
+        }
+
         return new Address(trimmedAddress);
     }
 

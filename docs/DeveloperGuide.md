@@ -274,27 +274,36 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
+Tech-savvy ghost kitchen managers who:
+* oversee multiple delivery-only brands and suppliers
+* handle frequent staff turnover and changing supplier contacts
+* need to quickly retrieve and update contacts
+* prefer typing over mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Our app helps ghost kitchen managers efficiently manage their diverse contact ecosystem — suppliers, delivery riders, staff, and partner brands. By offering categorisation, relationship links, fuzzy search, tagging, and archiving, it streamlines contact management. Managers can locate, update, and organise contacts faster than with traditional GUI-driven systems, ensuring smoother operations and fewer mix-ups.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                       | I want to …​                                         | So that I can…​                                                        |
+|----------|-----------------------------------------------|------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | new user                                      | see usage instructions                               | refer to instructions when I forget how to use the App                 |
+| `* * *`  | manager                                       | add a new contact                                    |                                                                        |
+| `* * *`  | manager                                       | delete a contact                                     | remove entries that I no longer need                                   |
+| `* * *`  | manager                                       | find a contact by name                               | locate details of persons without having to go through the entire list |
+| `* * *`  | manager                                       | edit a contact                                       | update changed phone numbers, emails or addresses                      |
+| `* * *`  | manager                                       | categorise a contact (Supplier, Staff, Customer)     | filter contacts by groups                                              |
+| `* *`    | manager                                       | archive contacts                                     | keep my contact clean and remove inactive contacts                     |
+| `* *`    | manager                                       | unarchive contacts                                   | restore contacts so they will not be lost                              |
+| `* *`    | manager                                       | mark a staff contact as inactive (e.g., on leave)    | I don’t accidentally assign tasks to them.                             |
+| `*`      | manager                                       | record staff shifts with their contacts              | reach out to the right staff on duty                                   |
+| `* `     | manager                                       | attach notes to a contact                            | remember context like “delivers only on weekends”                      |
+| `*`      | manager                                       | search for staff by their shift timings              | See all at once the staff that should be on duty                       |
+| `*`      | manager with many persons in the address book | sort persons by name                                 | locate a person easily                                                 |
+| `*`      | manager                                       | view usage analytics (e.g., most contacted suppliers) | optimise operations with insights                                      |
 
 *{More to be added}*
 
@@ -302,36 +311,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**U1. Add a new contact**
+
+**Actor: Manager**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Manager selects **Add Contact**
+2. System prompts for contact details
+3. Manager provides details and confirms.
+4. System records the contact
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Required fields missing.
+    * 2a1. System indicates missing field
+    * 2a2. Use case resumes at step 2
 
-  Use case ends.
+* 3a. Potential duplicate detected.
 
-* 3a. The given index is invalid.
+    * 3a1. System informs manager and offers to merge.
+    * 3a2. Use case resumes and step 2 or ends(if cancelled)
 
-    * 3a1. AddressBook shows an error message.
+**U2. Search for a contact**
 
-      Use case resumes at step 2.
+**Actor: Manager**
 
-*{More to be added}*
+**MSS**
+
+1. Manager initiates **Search Contact**
+2. System prompts for search keyword
+3. System displays list of matching contacts
+4. Manager selects a contact to view details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No keyword provided
+    * 2a1. System prompts for input.
+    * Use case resumes at step 2.
+* 3a. No matches found
+    * 3a1. System informs Manager and offers to **Add new contact (U1)**
+    * Use case ends.
+
+**U3. Link related contacts**
+
+**Actor: Manager**
+
+**MSS**
+
+1. Manager selects contact
+2. Manager initiates **Link Contact**
+3. System prompts for another contact to link and relationship type.
+4. Manager provides information
+5. System records the relationship
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Target contact not found
+    * 3a1. System informs manager and offers to **Add new contact (U2)**
+    * Use case resumes at step 3
+* 5a. Relationship already exists
+    * 5a1. System notifies Manager, no duplicate link created
+    * Use case ends.
+
+**U4. Archive a contact**
+
+**Actor: Manager**
+
+**MSS**
+
+1. Manager selects contact
+2. Manager initiates **Archive Contact**
+3. System prompts Manager to confirm the action
+4. Manager confirms
+5. System marks contact as archived and removes it from active lists.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Contact has active relationships
+    * 3a1. System informs manager and lists linked contacts.
+    * 3a2. Manager may cancel or proceed.
+    * Use case resumes at step 3 or ends.
+* 5a. Manager chooses to restore contact.
+    * 5a1. System un-archives and returns contact to active list.
+    * Use case ends.
+
+**U5. View contacts by category**
+
+**Actor: Manager**
+
+**MSS**
+
+1. Manager selects **View by category**
+2. System displays available categories
+3. Manager chooses a category (e.g Suppliers, Riders, Staff)
+4. System lists all contacts under category
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. No contacts in selected category
+    * 3a1. System shows "No contact found" message.
+    * Use case resumes at step 3 or ends.
+* 4a. Too many contacts to display.
+    * 5a1. System requests further filter input.
+    * Use case ends.
+
+
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  Adding or deleting contacts should complete within 1 second.
+5.  All contacts must be saved to persistent storage and retrievable after application restarts.
+6.  Commands should follow a predictable format (`add`, `delete`, `find`, `list`) with consistent feedback.
+7.  System should alert users of invalid inputs without crashing.
+8.  Clear and actionable error messages should be displayed for invalid inputs or commands.
+9.  Commands and searchable fields (name) should be case-insensitive.
+10. Validation rules should be in place to prevent duplicate entries.
+11. Leading and trailing whitespaces should be trimmed and treated as a single spacing for storage and data operations.
+12. Contact management features (add, delete, search, list) should be modular to allow scalability.
+13. The project should not use any licensed image without attribution.
+14. The system should ensure persistent data storage is updated immediately whenever data is added, edited or deleted.
+15. The system should prevent accidental exposure or loss of contact data due to improper file handling.
+16. All modules (add, delete, search, list) should be independently testable. 
+17. The system should maintain detailed logs of all add, delete, and edit operations for auditing and debugging. 
+18. Code should be documented to allow future developers to understand and maintain it.
+19. Error messages should be understandable by non-technical users.
 
 *{More to be added}*
 

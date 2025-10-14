@@ -23,7 +23,8 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Contact: %1$s";
+    public static final String MESSAGE_DELETE_EMPTY_LIST = "Empty Contact List: No contacts available to delete!";
 
     private final Index targetIndex;
 
@@ -36,8 +37,12 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException("Please select valid index from 1 to " + lastShownList.size() + "!");
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());

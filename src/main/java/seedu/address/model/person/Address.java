@@ -5,17 +5,30 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidAddressCharacters(String)}
+ * and {@link #isValidAddressLength(String)}.
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String INVALID_CHARACTER_MESSAGE_CONSTRAINTS = "Invalid characters found"
+            + " - only letters, apostrophes, hyphens, hashes and spaces are allowed";
+
+    public static final String INVALID_ADDRESS_LENGTH_MESSAGE_CONSTRAINTS = "Length of Address does not match criteria"
+            + " - Address must be between 2 - 100 characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
+     * Only letters, apostrophes, hyphens, hashes and spaces are allowed
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String CHARACTER_VALIDATION_REGEX = "[a-zA-Z0-9'#\\-,;.][a-zA-Z0-9'#\\-,;. ]*$";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     * Must be between 2 - 100 characters inclusive.
+     */
+    public static final String ADDRESS_LENGTH_VALIDATION_REGEX = "^.{2,100}$";
 
     public final String value;
 
@@ -26,15 +39,20 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAddressCharacters(address), INVALID_ADDRESS_LENGTH_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidAddressLength(address), INVALID_CHARACTER_MESSAGE_CONSTRAINTS);
         value = address;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public static boolean isValidAddressCharacters(String test) {
+        return test.matches(CHARACTER_VALIDATION_REGEX);
+    }
+
+    public static boolean isValidAddressLength(String test) {
+        return test.matches(ADDRESS_LENGTH_VALIDATION_REGEX);
     }
 
     @Override

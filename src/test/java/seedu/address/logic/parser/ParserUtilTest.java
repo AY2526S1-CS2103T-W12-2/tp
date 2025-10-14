@@ -28,11 +28,11 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "98765432";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_1 = "Customer";
+    private static final String VALID_TAG_2 = "Staff";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -123,6 +123,29 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    }
+
+    @Test
+    public void parseAddress_invalidCharacters_throwsParseException() {
+        String invalidCharAddress1 = "@Home";
+        String invalidCharAddress2 = "Blk$12 Road";
+        String invalidCharAddress3 = "123%Street";
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(invalidCharAddress1));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(invalidCharAddress2));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(invalidCharAddress3));
+    }
+
+    @Test
+    public void parseAddress_invalidLengthTooShort_throwsParseException() {
+        String tooShort = "A";
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(tooShort));
+    }
+
+    @Test
+    public void parseAddress_invalidLengthTooLong_throwsParseException() {
+        String tooLong = "A".repeat(101);
+        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(tooLong));
     }
 
     @Test

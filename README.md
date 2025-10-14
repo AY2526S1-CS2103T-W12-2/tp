@@ -1,14 +1,64 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2526S1-CS2103T-W12-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S1-CS2103T-W12-2/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+# GhostConnect
+
+GhostConnect is a desktop application designed for **tech-savvy ghost kitchen managers** to manage diverse contacts efficiently.
+
+---
+
+## Target Users
+
+- Tech-savvy ghost kitchen managers
+- Users who need to manage suppliers, delivery riders, staff, and partner brands
+
+---
+
+## Value Proposition
+
+Our app helps ghost kitchen managers manage contacts in fast-paced delivery-only food businesses. It offers:
+
+- Categorisation of contacts (supplier, staff, partner brands, delivery riders)  
+- Relationship linking  
+- Quick fuzzy search  
+- Archiving of inactive contacts  
+
+This solves the problem of **high turnover and fragmented contact information**.
+
+---
+
+## Contact Information to Track
+
+Each contact entry contains the following required information:
+
+- Name  
+- Contact Number  
+- Address  
+- Email  
+- Category  
+
+---
+
+## MVP Features
+
+### Add Contacts
+- Users can create a new contact entry.
+- Required fields: Name, Contact Number, Address, Email, and Relationship Category.
+
+### Delete Contacts
+- Users can remove existing contacts.
+- Deletion is done through a **unique identifier**.
+
+### Search Contacts
+- Users can search for entries by name.
+
+### View Contact List
+- The system displays all contacts in a structured list format.
+- Each contact shows basic details: Name, Contact Number, Category.
+
+---
+
+## Acknowledgment
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
