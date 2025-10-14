@@ -1,7 +1,7 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
 
 /**
  * Represents a Tag in the address book.
@@ -9,27 +9,46 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Unknown Category (Customer | Supplier | Staff)";
+    private static final String[] VALID_VALUES = {"Customer", "Supplier", "Staff"};
+
 
     public final String tagName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName A valid tag name. (Customer, Supplier, or Staff)
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        if (!isValidTagName(tagName)) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+        this.tagName = normalize(tagName);
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid category tag name.
+     * Case-insensitive check.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test == null || test.trim().isEmpty()) {
+            return false;
+        }
+        String lower = test.trim().toLowerCase();
+        for (String valid : VALID_VALUES) {
+            if (valid.toLowerCase().equals(lower)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Converts input to Title Case form ("customer" → "Customer"). */
+    private static String normalize(String input) {
+        String lower = input.trim().toLowerCase();
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
     }
 
     @Override
