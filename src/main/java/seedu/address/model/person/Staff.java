@@ -6,42 +6,118 @@ import seedu.address.model.category.Category;
 
 /**
  * Represents a staff member in the address book.
- * Inherits from person. Additional staff-specific behavior/fields can be added later.
+ * Each staff has a name, contact details, category, shift (AM/PM), and number of leaves.
  */
 public class Staff extends Person {
 
+    private int numberOfLeaves = 14; // Default 14 leaves
+    private Shift shift; // AM or PM shift (modifiable)
+
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Staff} object with all required fields.
+     *
+     * @param name     Name of the staff
+     * @param phone    Phone number of the staff
+     * @param email    Email address of the staff
+     * @param address  Residential address of the staff
+     * @param category Category of the staff
+     * @param shift    Work shift of the staff ("AM" or "PM")
      */
-    public Staff(Name name, Phone phone, Email email, Address address, Category category) {
+    public Staff(Name name, Phone phone, Email email, Address address, Category category, Shift shift) {
         super(name, phone, email, address, category);
-        requireAllNonNull(name, phone, email, address, category);
+        requireAllNonNull(name, phone, email, address, category, shift);
+        this.shift = shift;
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns the staff's current shift.
+     *
+     * @return The current {@code Shift} of the staff.
+     */
+    public Shift getShift() {
+        return shift;
+    }
+
+    /**
+     * Updates the staff's shift to a new value using a Shift object.
+     *
+     * @param newShift The new shift (non-null).
+     */
+    public void setShift(Shift newShift) {
+        requireAllNonNull(newShift);
+        this.shift = newShift;
+    }
+
+    /**
+     * Updates the staff's shift using a string value ("AM" or "PM").
+     *
+     * @param newShift The new shift string ("AM" or "PM").
+     */
+    public void setShift(String newShift) {
+        requireAllNonNull(newShift);
+        this.shift = new Shift(newShift); // validates automatically
+    }
+
+    /**
+     * Returns the remaining number of leaves for the staff.
+     *
+     * @return The number of available leaves.
+     */
+    public int getNumberOfLeaves() {
+        return numberOfLeaves;
+    }
+
+    /**
+     * Deducts leaves if available.
+     * Returns true if successful, false if not enough leaves.
+     *
+     * @param leavesToRemove Number of leaves to remove.
+     * @return true if removal successful, false otherwise.
+     */
+    public boolean removeLeaves(int leavesToRemove) {
+        if (leavesToRemove <= 0) {
+            throw new IllegalArgumentException("Number of leaves to remove must be positive.");
+        }
+        if (leavesToRemove > numberOfLeaves) {
+            return false;
+        }
+        numberOfLeaves -= leavesToRemove;
+        return true;
+    }
+
+    /**
+     * Adds leaves (for example, resetting annual leave).
+     *
+     * @param leavesToAdd Number of leaves to add.
+     */
+    public void addLeaves(int leavesToAdd) {
+        if (leavesToAdd <= 0) {
+            throw new IllegalArgumentException("Number of leaves to add must be positive.");
+        }
+        numberOfLeaves += leavesToAdd;
+    }
+
+    /**
+     * Returns true if both staff members have the same name.
+     * This defines a weaker notion of equality between two staff.
+     *
+     * @param otherPerson Another {@code Staff} object.
+     * @return true if both have the same name.
      */
     public boolean isSameStaff(Staff otherPerson) {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
     }
 
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Staff otherStaff)) {
             return false;
         }
@@ -50,15 +126,19 @@ public class Staff extends Person {
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
                 && otherStaff.getAddress().equals(getAddress())
-                && otherStaff.getCategory().equals(getCategory());
+                && otherStaff.getCategory().equals(getCategory())
+                && otherStaff.getShift().equals(getShift())
+                && otherStaff.getNumberOfLeaves() == getNumberOfLeaves();
     }
 
     @Override
     public String toString() {
-        return Person.class.getCanonicalName() + "{name=" + getName()
+        return "Staff{name=" + getName()
                 + ", phone=" + getPhone()
                 + ", email=" + getEmail()
                 + ", address=" + getAddress()
-                + ", categories=" + getCategory() + "}";
+                + ", category=" + getCategory()
+                + ", shift=" + shift
+                + ", numberOfLeaves=" + numberOfLeaves + "}";
     }
 }
