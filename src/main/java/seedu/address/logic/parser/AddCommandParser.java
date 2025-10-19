@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Staff;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -52,6 +53,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+
+        if (category.getCategoryName().equals("Staff")) {
+            Person staff = new Staff(name, phone, email, address, category);
+            return new AddCommand(staff);
+        }
 
         Person person = new Person(name, phone, email, address, category);
 

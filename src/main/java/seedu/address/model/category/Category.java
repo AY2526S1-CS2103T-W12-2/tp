@@ -28,6 +28,14 @@ public class Category {
     }
 
     /**
+     * Getter for category name
+     * @return categoryName as String
+     */
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    /**
      * Returns true if a given string is a valid category tag name.
      * Case-insensitive check.
      */
