@@ -37,9 +37,9 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com").withAddress("10th street").withCategory("Customer").build();
     public static final Person ELLE = new StaffBuilder().withName("Elle Meyer").withPhone("94822241")
             .withEmail("werner@example.com").withAddress("michegan ave").withCategory("Staff").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824271")
+    public static final Person FIONA = new SupplierBuilder().withName("Fiona Kunz").withPhone("94824271")
             .withEmail("lydia@example.com").withAddress("little tokyo").withCategory("Supplier").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824421")
+    public static final Person GEORGE = new SupplierBuilder().withName("George Best").withPhone("94824421")
             .withEmail("anna@example.com").withAddress("4th street").withCategory("Supplier").build();
 
     // Manually added

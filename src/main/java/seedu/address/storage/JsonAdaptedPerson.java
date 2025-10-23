@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -10,10 +13,12 @@ import seedu.address.model.category.Category;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.Staff;
+import seedu.address.model.person.Supplier;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -30,6 +35,7 @@ class JsonAdaptedPerson {
     @JsonProperty("address") private final String address;
     @JsonProperty("category") private final String category;
 
+    @JsonProperty("orders") private List<JsonAdaptedOrder> orders; // only for Supplier class
     @JsonProperty("shift") private String shift;
     @JsonProperty("numberOfLeaves") private Integer numberOfLeaves;
 
@@ -47,9 +53,6 @@ class JsonAdaptedPerson {
         this.numberOfLeaves = null;
     }
 
-    /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
-     */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty(value = "name") String name,
                              @JsonProperty(value = "phone") String phone,
@@ -62,6 +65,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.category = category;
+        this.orders = null;
         this.shift = null;
         this.numberOfLeaves = null;
     }
@@ -74,16 +78,34 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        category = source.getCategory().categoryName;
+        Category sourceCategory = source.getCategory();
+        category = sourceCategory.getCategoryName();
 
-        if (source instanceof Staff) {
+        if ("Supplier".equalsIgnoreCase(category) && source instanceof Supplier) {
+            this.orders = new ArrayList<>();
+            Supplier supplier = (Supplier) source;
+            List<Order> orders = supplier.getOrders();
+            for (Order order : orders) {
+                String deliveryDay = order.getDeliveryDay();
+                JsonAdaptedOrder jsonOrder = new JsonAdaptedOrder(order.getItem(),
+                        order.getQuantity(),
+                        order.getUnitPrice(),
+                        deliveryDay);
+                this.orders.add(jsonOrder);
+            }
+        } else if (source instanceof Staff) {
             Staff st = (Staff) source;
             this.shift = st.getShift() == null ? null : st.getShift().getValue();
             this.numberOfLeaves = st.getNumberOfLeaves();
         } else {
+            this.orders = null;
             this.shift = null;
             this.numberOfLeaves = null;
         }
+    }
+
+    public List<JsonAdaptedOrder> getOrders() {
+        return orders;
     }
 
     /**
@@ -139,7 +161,11 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
 
-        final Category modelCategories = new Category(category);
+        final Category modelCategory = new Category(category);
+
+        if ("Supplier".equalsIgnoreCase(category)) {
+            return toSupplierModelType(modelCategory, modelName, modelPhone, modelEmail, modelAddress);
+        }
 
         if ("Staff".equalsIgnoreCase(category)) {
             final String safeShift = (shift == null || shift.isBlank()) ? "AM" : shift;
@@ -151,7 +177,7 @@ class JsonAdaptedPerson {
             }
 
 
-            Staff staff = new Staff(modelName, modelPhone, modelEmail, modelAddress, modelCategories, modelShift);
+            Staff staff = new Staff(modelName, modelPhone, modelEmail, modelAddress, modelCategory, modelShift);
             int base = staff.getNumberOfLeaves(); // default is 14
             if (leaves > base) {
                 staff.addLeaves(leaves - base);
@@ -160,7 +186,26 @@ class JsonAdaptedPerson {
             }
             return staff;
         }
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCategories);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelCategory);
     }
 
+    /**
+     * Converts this Jackson-friendly adapted person object into the model's {@code Supplier} object.
+     */
+    private Supplier toSupplierModelType(Category modelCategory,
+                                       Name modelName,
+                                       Phone modelPhone,
+                                       Email modelEmail,
+                                       Address modelAddress) {
+        Supplier supplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelCategory);
+
+        if (this.orders != null) {
+            for (JsonAdaptedOrder jsonOrder : this.orders) {
+                supplier.addOrder(jsonOrder.toModelType());
+            }
+        }
+
+        return supplier;
+    }
 }

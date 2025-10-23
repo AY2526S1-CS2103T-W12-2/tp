@@ -26,7 +26,7 @@ public class TypicalSuppliers {
     public static final Supplier ALICE = new SupplierBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withCategory("Supplier")
-            .withItem("Apples").build();
+            .build();
     public static final Supplier BENSON = new SupplierBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com")
             .withPhone("98765432").withCategory("Supplier")
@@ -34,7 +34,7 @@ public class TypicalSuppliers {
     public static final Supplier CARL = new SupplierBuilder().withName("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com")
             .withAddress("wall street").withCategory("Supplier")
-            .withItem("Eggs").build();
+            .build();
     public static final Supplier DANIEL = new SupplierBuilder().withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com")
             .withAddress("10th street").withCategory("Supplier")
@@ -46,11 +46,11 @@ public class TypicalSuppliers {
     public static final Supplier FIONA = new SupplierBuilder().withName("Fiona Kunz")
             .withPhone("94824271").withEmail("lydia@example.com")
             .withAddress("little tokyo").withCategory("Supplier")
-            .withItem("Sirloin").build();
+            .build();
     public static final Supplier GEORGE = new SupplierBuilder().withName("George Best")
             .withPhone("94824421").withEmail("anna@example.com")
             .withAddress("4th street").withCategory("Supplier")
-            .withItem("Potatoes").build();
+            .build();
 
     // Manually added
     public static final Supplier HOON = new SupplierBuilder().withName("Hoon Meier")
@@ -69,7 +69,7 @@ public class TypicalSuppliers {
             .build();
     public static final Supplier BOB = new SupplierBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withCategory(VALID_CATEGORY_SUPPLIER).withItem("Apple")
+            .withCategory(VALID_CATEGORY_SUPPLIER)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

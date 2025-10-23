@@ -44,5 +44,4 @@ class JsonAdaptedCategory {
         }
         return new Category(categoryName);
     }
-
 }

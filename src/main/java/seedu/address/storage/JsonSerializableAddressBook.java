@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Supplier;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -52,7 +53,13 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+
+            if (person instanceof Supplier) {
+                Supplier supplier = (Supplier) person;
+                addressBook.addPerson(supplier);
+            } else {
+                addressBook.addPerson(person);
+            }
         }
         return addressBook;
     }
