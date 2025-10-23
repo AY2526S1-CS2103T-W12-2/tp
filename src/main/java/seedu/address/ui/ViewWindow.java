@@ -108,7 +108,8 @@ public class ViewWindow extends UiPart<Stage> {
             supplierItemLabel.setManaged(true);
             supplierOrdersLabel.setVisible(true);
             supplierOrdersLabel.setManaged(true);
-            supplierItemLabel.setText("Supplies: " + supplier.getItem());
+            String itemStr = supplier.getItem();
+            supplierItemLabel.setText("Supplies: " + (itemStr == null || itemStr.isEmpty() ? "No supplies" : itemStr));
             String orders = supplier.listOrders();
             supplierOrdersLabel.setText("Orders:\n" + (orders.isEmpty() ? "No orders" : orders));
         }
