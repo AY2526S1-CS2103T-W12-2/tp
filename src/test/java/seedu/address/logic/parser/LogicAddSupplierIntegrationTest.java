@@ -71,8 +71,8 @@ public class LogicAddSupplierIntegrationTest {
                 new Phone("91234567"),
                 new Email("johnDoe@email.com"),
                 new Address("Chinatown"),
-                new Category("Supplier")
-        );
+                new Category("Supplier"),
+                "Chicken");
 
         assertEquals(1, model.getFilteredPersonList().size(), "Exactly one person should be added");
         assertTrue(created instanceof Supplier, "Created person must be a Supplier instance");
