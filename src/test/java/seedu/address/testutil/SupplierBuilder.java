@@ -31,6 +31,7 @@ public class SupplierBuilder extends PersonBuilder {
         // Defensive check: only allow Person with Supplier category
         if (personToCopy instanceof Supplier) {
             Supplier supplier = (Supplier) personToCopy;
+            this.item = supplier.getItem();
             this.category = new Category("Supplier");
         } else if (personToCopy.getCategory().categoryName.equalsIgnoreCase("Supplier")) {
             this.item = "Chicken";
@@ -42,7 +43,7 @@ public class SupplierBuilder extends PersonBuilder {
 
     @Override
     public Supplier build() {
-        return new Supplier(name, phone, email, address, category);
+        return new Supplier(name, phone, email, address, category, item);
     }
 
     @Override
@@ -72,6 +73,17 @@ public class SupplierBuilder extends PersonBuilder {
     @Override
     public SupplierBuilder withCategory(String category) {
         super.withCategory("Supplier"); // always Supplier
+        return this;
+    }
+
+    /**
+     * Sets the item of the Supplier being built.
+     *
+     * @param item any valid String for now
+     * @return this builder
+     */
+    public SupplierBuilder withItem(String item) {
+        this.item = item;
         return this;
     }
 }

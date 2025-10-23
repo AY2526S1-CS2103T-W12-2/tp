@@ -62,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         if (category.categoryName.equals("Supplier")) {
-            Supplier supplier = new Supplier(name, phone, email, address, category);
+            Supplier supplier = new Supplier(name, phone, email, address, category, "Chicken");
             return new AddCommand(supplier);
         }
 
