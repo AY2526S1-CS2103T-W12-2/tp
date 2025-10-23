@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor User
+participant UI
+participant Logic
+participant AddCommandParser
+participant AddStaffCommand
+participant Model
+participant Storage
+
+User -> UI: "add n/Elle ... c/Staff"
+UI -> Logic: execute(commandText)
+Logic -> AddCommandParser: parse(commandText)
+AddCommandParser --> Logic: AddStaffCommand
+Logic -> AddStaffCommand: execute(model)
+AddStaffCommand -> Model: add(Staff{name, ..., shift=AM, leaves=14})
+Model -> Storage: save(addressBook)
+AddStaffCommand --> Logic: CommandResult
+Logic --> UI: feedback
+@enduml

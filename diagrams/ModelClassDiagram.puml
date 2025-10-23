@@ -14,12 +14,18 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
+Class Staff {
+- shift : Shift
+- numberOfLeaves : int
++ getShift() : Shift
++ addLeaves(int)
++ removeLeaves(int)
+}
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Category
-
 Class Supplier
 Class ItemName
 Class orders
@@ -47,8 +53,11 @@ Person *--> Email
 Person *--> Address
 Person *--> Category
 
+Person -|> Staff
+Staff *--> Shift
+Staff *--> Leaves
 Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+UniquePersonList -[hidden]up-> I
 
 Person -|> Supplier
 Supplier *--> ItemName
