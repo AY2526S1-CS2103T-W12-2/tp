@@ -18,7 +18,11 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Category
+
+Class Supplier
+Class ItemName
+Class orders
 
 Class I #FFFFFF
 }
@@ -41,10 +45,14 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> Category
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+
+Person -|> Supplier
+Supplier *--> ItemName
+Supplier "1" *--> "*"orders
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
