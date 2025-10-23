@@ -106,4 +106,21 @@ public class SupplierTest {
                 + ", category=" + ALICE.getCategory() + ", item=" + ALICE.getItem() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void getItem_nullItem_returnsEmptyString() {
+        Phone testPhone = new Phone("82192309");
+        Name testName = new Name("Test Name");
+        Email testEmail = new Email("test@email.com");
+        Address testAddress = new Address("Test Address");
+        Category testCat = new Category("Supplier");
+        
+        // Create supplier with null item (this might not be possible in practice due to constructor validation)
+        Supplier supplier = new Supplier(testName, testPhone, testEmail, testAddress, testCat, null);
+        assertEquals("", supplier.getItem(), "getItem() should return empty string when item is null");
+        
+        // Create supplier with empty item
+        supplier = new Supplier(testName, testPhone, testEmail, testAddress, testCat, "");
+        assertEquals("", supplier.getItem(), "getItem() should return empty string when item is empty");
+    }
 }

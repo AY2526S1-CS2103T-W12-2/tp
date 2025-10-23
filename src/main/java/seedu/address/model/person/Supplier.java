@@ -32,8 +32,12 @@ public class Supplier extends Person {
         this.orders = new ArrayList<>();
     }
 
+    /**
+     * Returns the item supplied by this supplier.
+     * @return the item string, or empty string if no item is set
+     */
     public String getItem() {
-        return this.item;
+        return this.item == null ? "" : this.item;
     }
 
     /**
