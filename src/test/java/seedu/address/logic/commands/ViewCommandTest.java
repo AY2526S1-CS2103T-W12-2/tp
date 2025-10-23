@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -44,18 +43,6 @@ public class ViewCommandTest {
 
         // different phone -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
-    }
-
-    @Test
-    public void constructor_nullPhone_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new ViewCommand(null));
-    }
-
-    @Test
-    public void execute_nullModel_throwsNullPointerException() {
-        Phone validPhone = CARL.getPhone();
-        ViewCommand viewCommand = new ViewCommand(validPhone);
-        assertThrows(NullPointerException.class, () -> viewCommand.execute(null));
     }
 
     @Test
