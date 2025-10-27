@@ -1,0 +1,19 @@
+@startuml
+' Sequence diagram for the ViewCommand process
+actor User
+participant UI
+participant Logic
+participant ViewCommandParser
+participant ViewCommand
+participant Model
+
+User -> UI: enter "view <phone>"
+UI -> Logic: execute(commandText)
+Logic -> ViewCommandParser: parse(commandText)
+ViewCommandParser --> Logic: ViewCommand
+Logic -> ViewCommand: execute(model)
+ViewCommand -> Model: findPersonByPhone(phone)
+Model --> ViewCommand: Person (or not found)
+ViewCommand --> Logic: CommandResult
+Logic --> UI: show person details or error
+@enduml
