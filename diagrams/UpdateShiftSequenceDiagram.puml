@@ -8,33 +8,27 @@ Participant ":Logic" as logic LOGIC_COLOR
 Participant ":Model" as model MODEL_COLOR
 Participant ":Storage" as storage STORAGE_COLOR
 
-' --- User initiates command ---
-user -[USER_COLOR]> ui : "updateshift p/91234567 s/AM"
+user -[USER_COLOR]> ui : "updateShift p/91234567 s/AM"
 activate ui UI_COLOR
 
-' --- UI passes command to Logic layer ---
-ui -[UI_COLOR]> logic : execute("updateshift p/91234567 s/AM")
+ui -[UI_COLOR]> logic : execute("updateShift p/91234567 s/AM")
 activate logic LOGIC_COLOR
 
-' --- Logic interacts with Model ---
 logic -[LOGIC_COLOR]> model : getFilteredPersonList()
 activate model MODEL_COLOR
 model --[MODEL_COLOR]> logic : returns ObservableList<Person>
 deactivate model
 
-' --- Logic finds matching Staff by phone ---
 logic -[LOGIC_COLOR]> model : setPerson(personToUpdate, staffToUpdate)
 activate model MODEL_COLOR
 model --[MODEL_COLOR]> logic : person updated in model
 deactivate model
 
-' --- Refresh the filtered person list so UI shows change ---
 logic -[LOGIC_COLOR]> model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
 activate model MODEL_COLOR
 model --[MODEL_COLOR]> logic
 deactivate model
 
-' --- Save updated address book to storage ---
 logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
 activate storage STORAGE_COLOR
 storage -[STORAGE_COLOR]> storage : Save to file
@@ -44,12 +38,10 @@ deactivate storage
 storage --[STORAGE_COLOR]> logic
 deactivate storage
 
-' --- Logic returns result to UI ---
 logic --[LOGIC_COLOR]> ui : CommandResult("Updated shift for Alice to AM.")
 deactivate logic
 
-' --- UI shows success message to User ---
-ui --[UI_COLOR]> user : "Shift updated successfully"
+ui --[UI_COLOR]> user : "Shift updated successfully for Alice"
 deactivate ui
 @enduml
 
