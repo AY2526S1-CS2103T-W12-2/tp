@@ -117,6 +117,8 @@
         "locating-persons-by-name-or-tag-find": "Locating persons by name or tag: find",
         "deleting-a-person-delete": "Deleting a person : delete",
         "clearing-all-entries-clear": "Clearing all entries : clear",
+        "adding-points-to-customer-updatepoints": "Adding points to Customer: updatePoints",
+        "update-shift-for-staff-updateshift": "Update shift for Staff: updateShift",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
         "editing-the-data-file": "Editing the data file",
