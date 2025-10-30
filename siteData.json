@@ -116,6 +116,8 @@
         "editing-a-person-edit": "Editing a person : edit",
         "locating-persons-by-name-or-tag-find": "Locating persons by name or tag: find",
         "deleting-a-person-delete": "Deleting a person : delete",
+        "add-order-for-supplier-addorder": "Add Order for Supplier: addOrder",
+        "update-order-for-supplier-updateorder": "Update Order for Supplier: updateOrder",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "adding-points-to-customer-updatepoints": "Adding points to Customer: updatePoints",
         "update-shift-for-staff-updateshift": "Update shift for Staff: updateShift",
