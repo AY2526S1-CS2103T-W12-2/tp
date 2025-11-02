@@ -53,18 +53,20 @@ Person *--> Email
 Person *--> Address
 Person *--> Category
 
-Person -|> Staff
+Person <|- Staff
 Staff *--> Shift
 Staff *--> Leaves
 Person -[hidden]up--> I
 UniquePersonList -[hidden]up-> I
 
-Person -|> Supplier
-Supplier "1" *--> "*"Orders
 
-Person -|> Customer
+Person <|- Supplier
+Supplier "1" *--> "*"Order
+
+Person <|- Customer
 Customer *--> "1" Tier
 Customer *--> Points
+
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
