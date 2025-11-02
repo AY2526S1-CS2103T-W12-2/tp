@@ -457,6 +457,123 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. System displays contacts efficiently, allowing all results to be viewed without truncation.
     * Use case ends.
 
+**U6. Edit an existing contact**
+
+**Actor: Manager**
+
+**MSS**
+
+1. Manager selects contact to be edited.
+2. Manager initiates **edit contact** and inputs details 
+3. System validates inputs and updates corresponding fields of contact.
+4. System displays success message. 
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. Contact does not exist in address book.
+   * 3a1. System informs manager that contact cannot be found.
+  
+   Use case resumes at step 2 or ends.
+* 3b. Input is invalid.
+    * 3b1. System informs manager that input is invalid.
+
+  Use case resumes at step 2 or ends.
+
+**U7. List all contacts**
+
+**Actor: Manager**
+
+**MSS**
+
+1. Manager executes list
+2. System display all contacts in address book.
+Use case ends
+
+**Extensions**
+None
+
+**U8. Delete a contact**
+**Actor: Manager** 
+**MSS**
+
+1. Manager chooses contact to be deleted.
+2. Managers executes **delete** command and inputs details.
+3. System validates inputs and removes the specified contact.
+4. System displays the confirmation message.
+Use case ends.
+**Extensions**
+* 1a. Chosen contact does not exist.
+*     1a1. System informs manager that chosen contact is invalid.
+Use case resumes at step 1 or ends. 
+
+**U9. Clear all contacts**
+**Actor: Manager**
+**MSS**
+1. Manager executes clear
+2. System removes all contacts.
+3. System displays confirmation message.
+Use case ends.
+
+**Extensions**
+None
+
+**U10. Exit the application**
+**Actor: Manager**
+**MSS**
+1. Manager executes exit.
+2. System saves all data and terminates.
+Use case ends.
+
+**U11. Update Customer Points**
+**Actor: Manager**
+**MSS**
+1. Manager chooses customer to add points.
+2. Manager executes **updatePoints** and inputs details 
+3. System validates inputs, locates the customer and adds corresponding points. 
+
+**Extension** 
+* 1a. Contact is not a customer
+*     1a1. System informs manager that chosen contact is not customer.
+Use case resumes at step 1 or ends.
+
+**U12. Update Staff Shift**
+**Actor: Manager**
+**MSS**
+1. Manager chooses staff to update shift.
+2. Manager executes **updateShift** and enters input.
+3. System validates inputs, locates the staff and updates their shift.
+4. System displays confirmation message.
+Use case ends. 
+
+**Extensions**
+* 3a. Contact chosen is not a staff
+*     3a1. System informs manager that chosen contact is not staff
+Use case continues at step 1 or ends
+*3a. Shift value is invalid
+*     3a1. System informs manager that shift value is invalid
+Use case continues at step 2 or ends. 
+
+**U13. Delete an order**
+**Actor: Manager**
+**MSS**
+
+1. Manager chooses supplier and the specified order from that supplier.
+2. Manager executes **deleteOrder** and inputs details
+3. System validates inputs, deletes the specified order from that supplier
+4. System displays a confirmation message.
+Use case ends.
+
+**Extensions**
+* 3a. Contact chosen is not a supplier
+*     3a1. System informs manager that chosen contact is not a supplier.
+Use case continues at step 1 or ends.
+* 3b. Order chosen does not exist.
+*     3b1. System informs manager that chosen order does not exist.
+Use case continues at step 1 or ends. 
+
+    
 
 ### Non-Functional Requirements
 
