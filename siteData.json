@@ -111,6 +111,10 @@
       "headings": {
         "ghostconnect-user-guide": "GhostConnect User Guide",
         "quick-start": "Quick Start",
+        "parameters": "Parameters",
+        "person-general-parameters": "Person General Parameters",
+        "staff-specific-parameters": "Staff Specific Parameters",
+        "supplier-specific-parameters": "Supplier Specific Parameters",
         "features": "Features",
         "general-commands": "General Commands",
         "category-specific-commands": "Category Specific Commands",
