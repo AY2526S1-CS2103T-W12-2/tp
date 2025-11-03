@@ -8,9 +8,8 @@ AddressBook *-right-> "1" UniquePersonList
 
 UniquePersonList -right-> Person
 
-Person -up-> "*" Category
-
 Person *--> Name
+Person *--> Category
 Person *--> Phone
 Person *--> Email
 Person *--> Address

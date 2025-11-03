@@ -21,14 +21,30 @@ Class Staff {
 + addLeaves(int)
 + removeLeaves(int)
 }
+Class Customer {
+- tier : Tier
+- points : int
++ getTier() : Tier
++ getPoints() : int
++ addPointsFromSpending(double)
+}
+Class Supplier {
+- orders : ArrayList<Order>
++ getOrders() : List<Order>
++ addOrder(Order)
+}
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Category
-Class Supplier
+Class Shift
+Class Tier
+Class Order
 Class ItemName
-Class orders
+Class ItemQuantity
+Class ItemUnitPrice
+Class ItemDeliveryDay
 
 Class I #FFFFFF
 }
@@ -55,17 +71,18 @@ Person *--> Category
 
 Person <|- Staff
 Staff *--> Shift
-Staff *--> Leaves
 Person -[hidden]up--> I
 UniquePersonList -[hidden]up-> I
 
+Person -|> Supplier
+Supplier "1" *--> "*" Order
+Order *--> ItemName
+Order *--> ItemQuantity
+Order *--> ItemUnitPrice
+Order *--> ItemDeliveryDay
 
-Person <|- Supplier
-Supplier "1" *--> "*"Order
-
-Person <|- Customer
-Customer *--> "1" Tier
-Customer *--> Points
+Person -|> Customer
+Customer *--> Tier
 
 
 Name -[hidden]right-> Phone
