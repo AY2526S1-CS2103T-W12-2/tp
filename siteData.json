@@ -41,6 +41,7 @@
       "title": "Developer Guide",
       "headings": {
         "ab-3-developer-guide": "AB-3 Developer Guide",
+        "table-of-contents": "Table of Contents",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -110,11 +111,13 @@
       "title": "GhostConnect User Guide",
       "headings": {
         "ghostconnect-user-guide": "GhostConnect User Guide",
+        "table-of-contents": "Table of Contents",
         "quick-start": "Quick Start",
         "parameters": "Parameters",
         "person-general-parameters": "Person General Parameters",
         "staff-specific-parameters": "Staff Specific Parameters",
         "supplier-specific-parameters": "Supplier Specific Parameters",
+        "customer-specific-parameters": "Customer Specific Parameters",
         "features": "Features",
         "general-commands": "General Commands",
         "category-specific-commands": "Category Specific Commands",
