@@ -342,7 +342,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise) <br>
+
+Note: For all commands, if input format or required prefixes are missing, the system will reject the command and display the error message indicating the correct format. This validation is handled uniformly across all commands. <br>
 
 **U1. Add a new contact**
 
@@ -499,7 +501,7 @@ None
 **MSS**
 
 1. Manager chooses contact to be deleted.
-2. Managers executes **delete** command and inputs details.
+2. Manager executes **delete** command and inputs details.
 3. System validates inputs and removes the specified contact.
 4. System displays the confirmation message.
 Use case ends.
