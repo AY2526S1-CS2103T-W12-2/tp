@@ -364,10 +364,12 @@ Format: `view p/PHONE`
 
 | Parameter        | Invalid Example                               | Error Message when invalid                                                                           |
 |:-----------------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
-| **PHONE NUMBER** | Full contact list is empty                    | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE NUMBER** | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                 |
+| **PHONE NUMBER** | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
 | **PHONE NUMBER** | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
 | **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
 | **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE NUMBER** | 999                                           | Phone numbers must have 8 digits and start with 6, 8 or 9.                                           |
 
 * The phone number entered must **exactly match** an existing contact.
 * You can open **multiple** view windows at the same time — useful for comparing contacts.
@@ -411,9 +413,9 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-| Parameter | Error Message when invalid                                       |
-|:----------|:-----------------------------------------------------------------|
-| **INDEX** | Please select valid index from 1 to (SIZE OF YOUR CONTACT LIST)! |
+| Parameter | Invalid Example                     | Error Message when invalid                                      |
+|:----------|:------------------------------------|:----------------------------------------------------------------|
+| **INDEX** | 11 (assuming there are 10 contacts) | Please select valid index from 1 to (SIZE OF YOUR CONTACT LIST)!|
 
 * Deletes the contact at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the **currently displayed contact list**.
@@ -480,12 +482,14 @@ From here onwards, all commands below uses `PHONE` to identify the contact.
 
 For the `PHONE` parameter, the error messages follows the table below:
 
-| Parameter  | Invalid Example                               | Error Message when invalid                                                                           |
-|:-----------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
-| **PHONE**  | Full contact list is empty                    | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE**  | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
-| **PHONE**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| Parameter | Invalid Example                               | Error Message when invalid                                                                           |
+|:----------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
+| **PHONE** | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                 |
+| **PHONE** | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
+| **PHONE** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | 999                                           | Phone numbers must have 8 digits and start with 6, 8 or 9.                                           |
 
 #### **Adding Points to a Customer: `updatePoints`**
 
@@ -581,7 +585,6 @@ Format: `updateShift p/PHONE s/SHIFT`
 
 | Parameter | Invalid Example | Error Message when invalid                                 |
 |:----------|:----------------|:-----------------------------------------------------------|
-| **PHONE** | 999             | Phone numbers must have 8 digits and start with 6, 8 or 9. |
 | **SHIFT** | Today           | Shift must be either 'AM' or 'PM' (case-insensitive).      |
 
 * Can only be performed on Staff.
@@ -600,7 +603,7 @@ This is **intentional**, to provide consistent confirmation feedback even when n
 
 ![result for 'updateShift p/98765412 b/PM'](images/updateShiftResult.png)
 
-#### **Adding Order from a Supplier: `addorder`**
+#### **Adding Order from a Supplier: `addOrder`**
 
 <box type="definition">
 
@@ -612,7 +615,6 @@ Format: `addOrder p/PHONE i/ITEM_NAME q/QUANTITY u/UNIT_PRICE d/DELIVERY_DAY`
 
 | Parameter             | Invalid Example | Error Message when invalid                                                                               |
 |:----------------------|:----------------|:---------------------------------------------------------------------------------------------------------|
-| **PHONE**             | 999             | Phone numbers must have 8 digits and start with 6, 8 or 9.                                               |
 | **ORDER INDEX**       | one             | Invalid Order Index, only positive integers lesser than 2,147,483,647 are allowed.                       |
 | **ITEM NAME**         | +++             | Names should only contain alphanumeric characters and spaces, and it should not be blank                 |
 | **ITEM QUANTITY**     | -10             | Item Quantity should not be blank and only positive integers are allowed (No decimals)                   |                            
@@ -639,12 +641,12 @@ Outputs:
 **Examples:**
 
 * Assuming that the Supplier `John Doe` has the phone number `91234567`
-* `addorder p/91234567 i/Chicken q/20 u/5.60 d/every Tuesday`
+* `addOrder p/91234567 i/Chicken q/20 u/5.60 d/every Tuesday`
 * The above command creates an order in John Doe's order list.
 
 ![result for 'addOrder p/91234567 i/Chicken q/20 u/9.80 d/every Tuesday'](images/addOrderResult.png)
 
-#### **Updating Order from a Supplier: `updateorder`**
+#### **Updating Order from a Supplier: `updateOrder`**
 
 <box type="definition">
 
@@ -656,7 +658,6 @@ Format: `updateOrder p/PHONE o/ORDER_INDEX [i/ITEM_NAME] [q/QUANTITY] [u/UNIT_PR
 
 | Parameter             | Invalid Example | Error Message when invalid                                                                               |
 |:----------------------|:----------------|:---------------------------------------------------------------------------------------------------------|
-| **PHONE**             | 999             | Phone numbers must have 8 digits and start with 6, 8 or 9.                                               |
 | **ORDER INDEX**       | one             | Invalid Order Index, only positive integers lesser than 2,147,483,647 are allowed.                       |
 | **ITEM NAME**         | +++             | Names should only contain alphanumeric characters and spaces, and it should not be blank                 |
 | **ITEM QUANTITY**     | -10             | Item Quantity should not be blank and only positive integers are allowed (No decimals)                   |                            
@@ -695,7 +696,7 @@ After closing the deal you added a single order to the order list:<br/>
 
 You realize a mistake in the order quantity and decided to update it: 
 
-* `updateorder p/91234567 o/1 q/100`
+* `updateOrder p/91234567 o/1 q/100`
 * The above command will edit the first order in John Doe's order list, such that the quantity is changed to `100`.
 
 ![result for 'updateorder p/91234567 o/1 q/100'](images/updateOrderResult.png)
@@ -712,7 +713,6 @@ Format: `deleteOrder p/PHONE o/ORDER_INDEX`
 
 | Parameter             | Invalid Example | Error Message when invalid                                                         |
 |:----------------------|:----------------|:-----------------------------------------------------------------------------------|
-| **PHONE**             | 999             | Phone numbers must have 8 digits and start with 6, 8 or 9.                         |
 | **ORDER INDEX**       | one             | Invalid Order Index, only positive integers lesser than 2,147,483,647 are allowed. |
 
 
