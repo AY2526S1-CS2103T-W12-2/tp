@@ -84,9 +84,10 @@ public class UpdateOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person person = null;
+        ObservableList<Person> fullList = model.getAddressBook().getPersonList();
         ObservableList<Person> currentList = model.getFilteredPersonList();
 
-        if (currentList.isEmpty()) {
+        if (fullList.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY_LIST);
         }
 
@@ -97,7 +98,6 @@ public class UpdateOrderCommand extends Command {
             }
         }
 
-        ObservableList<Person> fullList = model.getAddressBook().getPersonList();
         if (person == null && fullList.size() != currentList.size()) {
             throw new CommandException(String.format(MESSAGE_NOT_FOUND + ERROR_EXTENSION, supplierPhone));
         }

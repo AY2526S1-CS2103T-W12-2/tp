@@ -30,6 +30,7 @@ public class RedeemPointsCommand extends Command {
     public static final String MESSAGE_NOT_ENOUGH_POINTS =
             "%s does not have enough points to deduct %d (current: %d).";
     public static final String ERROR_EXTENSION = " Try running 'list' before using the command again.";
+    public static final String MESSAGE_EMPTY_LIST = "Empty contact list: No contacts available to update!";
 
 
     private final Phone phone;
@@ -50,6 +51,9 @@ public class RedeemPointsCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Person> fullList = model.getAddressBook().getPersonList();
+        if (fullList.isEmpty()) {
+            return new CommandResult(MESSAGE_EMPTY_LIST);
+        }
 
         Person target = model.getFilteredPersonList().stream()
                 .filter(p -> p.getPhone().equals(phone))

@@ -23,6 +23,7 @@ public class ViewCommand extends Command {
         + "Parameters: " + PREFIX_PHONE + "PHONE\n"
         + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "91234567";
     public static final String ERROR_EXTENSION = " Try running 'list' before using the command again.";
+    public static final String MESSAGE_EMPTY_LIST = "Empty contact list: No contacts available to update!";
 
     private final Phone targetPhone;
 
@@ -41,6 +42,9 @@ public class ViewCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Person> fullList = model.getAddressBook().getPersonList();
+        if (fullList.isEmpty()) {
+            throw new CommandException(MESSAGE_EMPTY_LIST);
+        }
 
         Optional<Person> match = model.getFilteredPersonList().stream()
                 .filter(p -> p.getPhone().equals(targetPhone))
