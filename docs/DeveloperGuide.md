@@ -299,7 +299,7 @@ Aspect: Duplicate detection
 
 The `addOrder` command appends a new `Order` entry to a Supplier identified by phone number.
 
-1. User input parsing: `AddOrderCommandParser#parse()` tokenizes `p/PHONE`, `i/ITEM_NAME`, `q/QUANTITY`, `u/UNIT_PRICE`, and optional `d/DELIVERY_DAY`.
+1. User input parsing: `AddOrderCommandParser#parse()` tokenizes `p/PHONE`, `i/ITEM_NAME`, `q/QUANTITY`, `u/UNIT_PRICE`, and `d/DELIVERY_DAY`.
 2. Target resolution: `AddOrderCommand#execute()` locates the Supplier in `Model#getFilteredPersonList()` by phone; validates that the person is a `Supplier`.
 3. Order creation: Builds a domain `Order` (and value objects) from the parsed parameters.
 4. Model update: Creates an updated `Supplier` with the new order appended and calls `Model#setPerson(original, updated)`.
@@ -325,7 +325,7 @@ Step 4. The model persists to storage and returns a success `CommandResult`.
 Aspect: Supplier immutability and updates
 
 * Current choice: Treat `Supplier` as immutable. Create an updated copy with appended orders and replace via `Model#setPerson`.
-    * Pros: Clear change semantics; easier undo/redo in future.
+    * Pros: Clear change semantics.
     * Cons: Requires object copying; potential overhead for large order lists.
 
 Aspect: Duplicate order rules
@@ -388,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | manager handling inventory               | add orders for Suppliers                         | keep track of delivery from specific suppliers.                                                                              |
 | `* * `   | manager handling inventory               | update orders for Suppliers                      | update changed quantity, unit price, etc.                                                                                    |
 | `* *`    | manager handling inventory               | delete orders from Suppliers                     | remove entries indicating completed or cancelled deliveries.                                                                 |
-| `*`      | manager                                  | save the data given when application closes      | retain all contact details, ensuring no information is lost and work can be resumed seamlessly when application is reopened. |
+| `* *`    | manager                                  | save the data given when application closes      | retain all contact details, ensuring no information is lost and work can be resumed seamlessly when application is reopened. |
 
 ### Use cases
 

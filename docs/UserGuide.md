@@ -362,12 +362,13 @@ Opens a separate popup window showing all available details for the selected con
 
 Format: `view p/PHONE`
 
-| Parameter        | Invalid Example                               | Error Message when invalid                                                                           |
-|:-----------------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
-| **PHONE NUMBER** | Full contact list is empty                    | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE NUMBER** | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
-| **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| Parameter         | Invalid Example                               | Error Message when invalid                                                                            |
+|:------------------|:----------------------------------------------|:------------------------------------------------------------------------------------------------------|
+| **PHONE NUMBER**  | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                  |
+| **PHONE NUMBER**  | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
+| **PHONE NUMBER**  | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                     |
+| **PHONE NUMBER**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
+| **PHONE NUMBER**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
 
 * The phone number entered must **exactly match** an existing contact.
 * You can open **multiple** view windows at the same time — useful for comparing contacts.
@@ -480,13 +481,14 @@ From here onwards, all commands below uses `PHONE` to identify the contact.
 
 For the `PHONE` parameter, the error messages follows the table below:
 
-| Parameter       | Invalid Example                               | Error Message when invalid                                                                           |
-|:----------------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
-| **PHONE**       | Full contact list is empty                    | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE**       | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
-| **PHONE**       | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE**       | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
-| **PHONE**       | 999                                           | Phone numbers must have 8 digits and start with 6, 8 or 9.                                           |
+| Parameter | Invalid Example                               | Error Message when invalid                                                                           |
+|:----------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
+| **PHONE** | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                 |
+| **PHONE** | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
+| **PHONE** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE** | 999                                           | Phone numbers must have 8 digits and start with 6, 8 or 9.                                           |
 
 #### **Adding Points to a Customer: `updatePoints`**
 
