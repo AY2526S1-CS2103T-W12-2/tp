@@ -39,7 +39,7 @@ pageNav: 3
 
 This project is based on [SE-EDU AddressBook Level 3](https://github.com/se-edu/addressbook-level3).
 Parts of the code and documentation were adapted from it.
-
+Github Copilot was also used by the group to assist with auto completion and bug fixing of the code during development.
 
 
 --------------------------------------------------------------------------------------------------------------------
