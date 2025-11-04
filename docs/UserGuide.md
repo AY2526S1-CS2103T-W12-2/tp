@@ -362,13 +362,14 @@ Opens a separate popup window showing all available details for the selected con
 
 Format: `view p/PHONE`
 
-| Parameter         | Invalid Example                               | Error Message when invalid                                                                            |
-|:------------------|:----------------------------------------------|:------------------------------------------------------------------------------------------------------|
-| **PHONE NUMBER**  | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                  |
-| **PHONE NUMBER**  | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
-| **PHONE NUMBER**  | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                     |
-| **PHONE NUMBER**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
-| **PHONE NUMBER**  | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again.  |
+| Parameter        | Invalid Example                               | Error Message when invalid                                                                           |
+|:-----------------|:----------------------------------------------|:-----------------------------------------------------------------------------------------------------|
+| **PHONE NUMBER** | Full contact list is empty                    | Empty contact list: No contacts available to update!                                                 |
+| **PHONE NUMBER** | Filtered contact list is empty                | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE NUMBER** | Phone number not in the full contact list     | No person found with phone number [PHONE NUMBER].                                                    |
+| **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE NUMBER** | Phone number not in the filtered contact list | No person found with phone number [PHONE NUMBER]. Try running 'list' before using the command again. |
+| **PHONE NUMBER** | 999                                           | Phone numbers must have 8 digits and start with 6, 8 or 9.                                           |
 
 * The phone number entered must **exactly match** an existing contact.
 * You can open **multiple** view windows at the same time — useful for comparing contacts.
@@ -412,9 +413,9 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-| Parameter | Error Message when invalid                                       |
-|:----------|:-----------------------------------------------------------------|
-| **INDEX** | Please select valid index from 1 to (SIZE OF YOUR CONTACT LIST)! |
+| Parameter | Invalid Example                     | Error Message when invalid                                      |
+|:----------|:------------------------------------|:----------------------------------------------------------------|
+| **INDEX** | 11 (assuming there are 10 contacts) | Please select valid index from 1 to (SIZE OF YOUR CONTACT LIST)!|
 
 * Deletes the contact at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the **currently displayed contact list**.
